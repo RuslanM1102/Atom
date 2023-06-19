@@ -4,9 +4,13 @@ using UnityEngine;
 
 public class EyesLook : MonoBehaviour
 {
-    public float MouseSens = 500f;
-    public Transform playerBody;
-    float xRotate = 0f;
+    [SerializeField]
+    private float MouseSens = 500f;
+    [SerializeField]
+    private Transform playerBody;
+
+
+    private float xRotate = 0f;
     // Start is called before the first frame update
     void Start()
     {

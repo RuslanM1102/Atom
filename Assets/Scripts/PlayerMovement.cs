@@ -4,22 +4,27 @@ using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 10f;
-    public float gravity = -15.81f;
-    public float jumpheigt = 4f;
+    [SerializeField]
+    private float _speed = 10f;
+    [SerializeField]
+    private float _gravity = -15.81f;
 
     Vector3 velocity;
-    public Transform groundCheck;
-    public float groundDist = 0.4f;
-    public LayerMask groundMask;
+    [SerializeField]
+    private Transform _groundCheck;
+    [SerializeField]
+    private float _groundDist = 0.4f;
+    [SerializeField]
+    private LayerMask _groundMask;
     bool isGrounded;
 
-    public CharacterController characterController;
+    [SerializeField]
+    private CharacterController characterController;
 
     // Update is called once per frame
     void Update()
     {
-        isGrounded = Physics.CheckSphere(groundCheck.position, groundDist, groundMask);
+        isGrounded = Physics.CheckSphere(_groundCheck.position, _groundDist, _groundMask);
 
         if(isGrounded && velocity.y < 0)
         {
@@ -30,9 +35,9 @@ public class PlayerMovement : MonoBehaviour
         float z = Input.GetAxis("Vertical");
 
         Vector3 move = transform.right * x + transform.forward * z;
-        characterController.Move(move * speed * Time.deltaTime);
+        characterController.Move(move * _speed * Time.deltaTime);
 
-        velocity.y += gravity * Time.deltaTime;
+        velocity.y += _gravity * Time.deltaTime;
         characterController.Move(velocity * Time.deltaTime);
     }
 }
