@@ -4,30 +4,31 @@ using UnityEngine;
 
 public class EyesLook : MonoBehaviour
 {
-    [SerializeField]
-    private float MouseSens = 500f;
-    [SerializeField]
-    private Transform playerBody;
+    [SerializeField] private float MouseSensivity = 2f;
+    [SerializeField] private Transform playerBody;
+    private float xRotate;
 
-
-    private float xRotate = 0f;
-    // Start is called before the first frame update
-    void Start()
+    private void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
+        xRotate = 0;
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * MouseSens * Time.deltaTime;
-        float mouseY = Input.GetAxis("Mouse Y") * MouseSens * Time.deltaTime;
+        float mouseX = Input.GetAxis("Mouse X") * MouseSensivity;
+        float mouseY = Input.GetAxis("Mouse Y") * MouseSensivity;
 
-        xRotate -= mouseY;
+        if(mouseY != 0f)
+        {
+            xRotate -= mouseY;
+            xRotate = Mathf.Clamp(xRotate, -90f, 90f);
+            transform.localRotation = Quaternion.Euler(xRotate, 0f, 0f);
+        }
 
-        xRotate = Mathf.Clamp(xRotate, -90f, 90f);
-
-        transform.localRotation = Quaternion.Euler(xRotate, 0f, 0f);
-        playerBody.Rotate(Vector3.up * mouseX);
+        if(mouseX != 0f)
+        {
+            playerBody.Rotate(Vector3.up * mouseX);
+        }
     }
 }

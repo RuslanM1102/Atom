@@ -5,18 +5,13 @@ using UnityEngine;
 public class DoorScript : MonoBehaviour
 {
     public bool isOpen = false;
-    [SerializeField]
-    private float Speed = 1f;
-    [SerializeField]
-    private bool IsRotatingDoor = true;
-    [SerializeField]
-    private float RotationAmount = 90f;
-    [SerializeField]
-    private float forwardDirection = 0;
+    [SerializeField] private float Speed = 1f;
+    [SerializeField] private bool IsRotatingDoor = true;
+    [SerializeField] private float RotationAmount = 90f;
+    [SerializeField] private float forwardDirection = 0;
 
     private Vector3 StartRotation;
     private Vector3 Forward;
-
     private Coroutine AnimationCoroutine;
 
     private void Awake()
