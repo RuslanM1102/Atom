@@ -4,93 +4,72 @@ using UnityEngine;
 
 public class Door : InteractableObject
 {
-    public bool isOpen = false;
-    [SerializeField] private float Speed = 1f;
-    [SerializeField] private bool IsRotatingDoor = true;
-    [SerializeField] private float RotationAmount = 90f;
-    [SerializeField] private float forwardDirection = 0;
+    [SerializeField] private float _speed = 1f;
+    [SerializeField] private float _rotationAmount = 90f;
+    [SerializeField] private bool _isRight = false;
 
-    private Vector3 StartRotation;
-    private Vector3 Forward;
-    private Coroutine AnimationCoroutine;
+    private bool _isOpen = false;
+    private bool _isRotating = false;
+    private float _time;
+    private Vector3 _startRotation, _endRotation;
+    private IEnumerator _stateCoroutine;
 
-    private void Awake()
+    private void Start()
     {
-        StartRotation = transform.rotation.eulerAngles;
+        _startRotation = transform.rotation.eulerAngles;
+    }
 
-        Forward = transform.right;
+    private int RotateModifier
+    {
+        get
+        {
+            int openModifier =_isOpen ? 1 : -1;
+            int positionModifier = _isRight ? 1 : -1;
+            return openModifier * positionModifier;
+        }
     }
 
     public override void Interact()
     {
-        //if (!isOpen)
-        //{
-        //    if (AnimationCoroutine != null)
-        //    {
-        //        StopCoroutine(AnimationCoroutine);
-        //    }
-        //    if (IsRotatingDoor)
-        //    {
-        //        float dot = Vector3.Dot(Forward, (UserPos - transform.position).normalized);
-        //        AnimationCoroutine = StartCoroutine(DoRotationOpen(dot));
-        //    }
-        //}
-    }
-
-    private IEnumerator DoRotationOpen(float ForwardAmount)
-    {
-        Quaternion startRotation = transform.rotation;
-        Quaternion endRotation;
-
-        if (ForwardAmount >= forwardDirection)
+        if (_isRotating)
         {
-            endRotation = Quaternion.Euler(new Vector3(0, startRotation.y - RotationAmount, 0));
+            StopCoroutine(_stateCoroutine);
+            _isRotating = false;
+            _time = 1 - _time;
         }
         else
         {
-            endRotation = Quaternion.Euler(new Vector3(0, startRotation.y + RotationAmount, 0));
+            _time = 0;
         }
-        isOpen = true;
+        _isOpen = !_isOpen;
 
-        float time = 0;
-        while (time < 1)
-        {
-            transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
-            yield return null;
-            time += Time.deltaTime * Speed;
-        }
-
+        _stateCoroutine = ChangeState();
+        StartCoroutine(_stateCoroutine);
     }
 
-    public void Close()
+    private IEnumerator ChangeState()
     {
-        if (isOpen)
+        _isRotating = true;
+        float speed = (1 - _time) * _speed;
+        while (_time < 1)
         {
-            if (AnimationCoroutine != null)
-            {
-                StopCoroutine(AnimationCoroutine);
-            }
-            if (IsRotatingDoor)
-            {
-                AnimationCoroutine = StartCoroutine(DoRotationClose());
-            }
-        }
-    }
-
-    private IEnumerator DoRotationClose()
-    {
-        Quaternion startRotation = transform.rotation;
-        Quaternion endRotation = Quaternion.Euler(StartRotation);
-
-        isOpen = false;
-
-        float time = 0;
-        while (time < 1)
-        {
-            transform.rotation = Quaternion.Slerp(startRotation, endRotation, time);
+            float rotation = _rotationAmount * Time.deltaTime * _speed;
+            transform.RotateAround(transform.position, Vector3.up, rotation * RotateModifier);
+            _time += Time.deltaTime * _speed;
             yield return null;
-            time += Time.deltaTime * Speed;
         }
+        var rotationVector = _startRotation;
+        float x = rotationVector[0];
+        float y = rotationVector[1];
+        float z = rotationVector[2];
+
+        if (_isOpen)
+        {
+            y += _rotationAmount * RotateModifier;
+        }
+
+        transform.rotation = Quaternion.Euler(x, y, z);
+        _isRotating = false;      
     }
 }
 

@@ -3,11 +3,24 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemPresenter : InteractableObject
+[RequireComponent(typeof(Outline))]
+public class ItemPresenter : InteractableObject, IOutlineable
 {
+    private Outline _outline;
+
+    private void Awake()
+    {
+        _outline = GetComponent<Outline>();
+    }
+
     public override void Interact()
     {
         Destroy(gameObject);
         OnInteracted?.Invoke();
+    }
+
+    public void TurnHighlight()
+    {
+        _outline.enabled = !_outline.enabled;
     }
 }
