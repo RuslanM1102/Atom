@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 1037
   m_ShowMode: 4
-  m_Title: Scene
+  m_Title: Project
   m_RootView: {fileID: 2}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -122,7 +122,7 @@ MonoBehaviour:
   m_MinSize: {x: 679, y: 492}
   m_MaxSize: {x: 14002, y: 14042}
   vertical: 0
-  controlID: 57
+  controlID: 92
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -147,7 +147,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 492}
   m_MaxSize: {x: 10001, y: 14042}
   vertical: 1
-  controlID: 105
+  controlID: 101
 --- !u!114 &7
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -172,7 +172,7 @@ MonoBehaviour:
   m_MinSize: {x: 403, y: 221}
   m_MaxSize: {x: 8003, y: 4021}
   vertical: 0
-  controlID: 106
+  controlID: 102
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -396,9 +396,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 
+      m_SelectedIDs: 12aa0000
       m_LastClickedID: 0
-      m_ExpandedIDs: ecd2ffff2cd4ffff
+      m_ExpandedIDs: 0ad4ffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -458,9 +458,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 8.596288, y: 3.048359, z: -25.6987}
+    m_Target: {x: 55.584175, y: 7.8966293, z: 8.123997}
     speed: 2
-    m_Value: {x: 8.596288, y: 3.048359, z: -25.6987}
+    m_Value: {x: 55.584175, y: 7.8966293, z: 8.123997}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -507,13 +507,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: -0.3061756, y: 0.06876926, z: -0.022109766, w: -0.9492634}
+    m_Target: {x: -0.25078464, y: 0.37674347, z: -0.10664745, w: -0.88536245}
     speed: 2
-    m_Value: {x: -0.30613253, y: 0.07019089, z: -0.0225683, w: -0.9491296}
+    m_Value: {x: -0.25078464, y: 0.3767435, z: -0.10664745, w: -0.8853625}
   m_Size:
-    m_Target: 34.147633
+    m_Target: 2.3678055
     speed: 2
-    m_Value: 32.677162
+    m_Value: 2.3678055
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -576,22 +576,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Materials
+    - Assets
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Materials
+  - Assets
   m_LastFoldersGridSize: -1
   m_LastProjectPath: D:\git2\Atom
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 04830000
-    m_LastClickedID: 33540
-    m_ExpandedIDs: 00000000fe82000000ca9a3b
+    m_SelectedIDs: 0caa0000
+    m_LastClickedID: 43532
+    m_ExpandedIDs: 000000000caa000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -619,7 +619,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 00000000fe820000
+    m_ExpandedIDs: 000000000caa0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 

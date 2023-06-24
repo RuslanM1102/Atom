@@ -7,6 +7,7 @@ public class EyesLook : MonoBehaviour
     [SerializeField] private float MouseSensivity = 2f;
     [SerializeField] private Transform playerBody;
     private float xRotate;
+    public static bool _isBlocked = false;
 
     private void Start()
     {
@@ -16,19 +17,26 @@ public class EyesLook : MonoBehaviour
 
     private void Update()
     {
-        float mouseX = Input.GetAxis("Mouse X") * MouseSensivity;
-        float mouseY = Input.GetAxis("Mouse Y") * MouseSensivity;
-
-        if(mouseY != 0f)
+        if (_isBlocked)
         {
-            xRotate -= mouseY;
-            xRotate = Mathf.Clamp(xRotate, -90f, 90f);
-            transform.localRotation = Quaternion.Euler(xRotate, 0f, 0f);
+            return;
         }
-
-        if(mouseX != 0f)
+        else
         {
-            playerBody.Rotate(Vector3.up * mouseX);
+            float mouseX = Input.GetAxis("Mouse X") * MouseSensivity;
+            float mouseY = Input.GetAxis("Mouse Y") * MouseSensivity;
+
+            if (mouseY != 0f)
+            {
+                xRotate -= mouseY;
+                xRotate = Mathf.Clamp(xRotate, -90f, 90f);
+                transform.localRotation = Quaternion.Euler(xRotate, 0f, 0f);
+            }
+
+            if (mouseX != 0f)
+            {
+                playerBody.Rotate(Vector3.up * mouseX);
+            }
         }
     }
 }

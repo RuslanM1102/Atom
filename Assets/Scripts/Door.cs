@@ -43,6 +43,7 @@ public class Door : InteractableObject
         }
         _isOpen = !_isOpen;
 
+        PlayerInteract.text1.fontStyle = TMPro.FontStyles.Strikethrough;
         _stateCoroutine = ChangeState();
         StartCoroutine(_stateCoroutine);
     }

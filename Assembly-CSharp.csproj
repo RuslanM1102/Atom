@@ -59,12 +59,18 @@
     <Compile Include="Assets\QuickOutline\Scripts\Outline.cs" />
     <Compile Include="Assets\Scripts\ItemStorage.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\Scripts\Quest.cs" />
+    <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\PlayerInteract.cs" />
     <Compile Include="Assets\Scripts\Door.cs" />
     <Compile Include="Assets\Scripts\ItemPresenter.cs" />
+    <Compile Include="Assets\Scripts\DocWrite.cs" />
     <Compile Include="Assets\Scripts\Root.cs" />
     <Compile Include="Assets\Scripts\IOutlineable.cs" />
     <Compile Include="Assets\Scripts\EyesLook.cs" />
+    <Compile Include="Assets\Scripts\Tasks.cs" />
+    <Compile Include="Assets\Scripts\NPCTalk.cs" />
+    <Compile Include="Assets\Scripts\DocumentOpen.cs" />
     <Compile Include="Assets\Scripts\DoorScript.cs" />
     <Compile Include="Assets\Scripts\InteractableObject.cs" />
   </ItemGroup>

@@ -1,12 +1,17 @@
 using UnityEngine;
+using TMPro;
 
 public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] private float _maxUseDistance = 5f;
 
+    public static bool _isBlocked = false;
     private Transform _camera;
     private GameObject _UIInteract;
     private MonoBehaviour _currentObject;
+    public TMP_Text text;
+    public static TMP_Text text1;
+
     private MonoBehaviour CurrentObject
     {
         get => _currentObject;
@@ -28,6 +33,7 @@ public class PlayerInteract : MonoBehaviour
     }
     private void Start()
     {
+        text1 = text;
         _camera = Camera.main.transform;
         _UIInteract = Root.Instance.UIInteract;
     }
@@ -42,20 +48,27 @@ public class PlayerInteract : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (Physics.Raycast(_camera.position, _camera.forward, out RaycastHit hit, _maxUseDistance))
-        { 
-            if (hit.collider.TryGetComponent<InteractableObject>(out InteractableObject interactable))
+        if (_isBlocked)
+        {
+            return;
+        }
+        else
+        {
+            if (Physics.Raycast(_camera.position, _camera.forward, out RaycastHit hit, _maxUseDistance))
             {
-                CurrentObject = interactable;
+                if (hit.collider.TryGetComponent<InteractableObject>(out InteractableObject interactable))
+                {
+                    CurrentObject = interactable;
+                }
+                else
+                {
+                    CurrentObject = null;
+                }
             }
             else
             {
                 CurrentObject = null;
             }
-        }
-        else
-        {
-            CurrentObject = null;
         }
     }
 }
