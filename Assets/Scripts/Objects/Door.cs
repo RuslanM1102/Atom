@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,6 +17,7 @@ public class Door : InteractableObject
     private Quaternion _endRotation;
     private IEnumerator _stateCoroutine;
     private Rigidbody _rigidbody;
+
 
     private void Start()
     {

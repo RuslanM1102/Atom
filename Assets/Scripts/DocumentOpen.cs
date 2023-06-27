@@ -9,6 +9,8 @@ public class DocumentOpen : InteractableObject
     [SerializeField] private InterfaceReference<ICompleteable, MonoBehaviour> _condition;
     private bool _isOpen = false;
     private Animator _animator;
+    
+
 
     private void Awake()
     {
@@ -23,5 +25,7 @@ public class DocumentOpen : InteractableObject
             _animator.SetBool("isOpen", _isOpen);
             OnInteracted?.Invoke();
         }
+
+
     }
 }
