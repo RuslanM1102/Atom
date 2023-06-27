@@ -6,9 +6,11 @@ using UnityEngine;
 public class Root : MonoBehaviour
 {
     public static Root Instance { get; private set; }
-    [SerializeField] private GameObject _UIInteract;
+    [SerializeField] private UIController _mainUI;
+    [SerializeField] private PlayerController _player;
 
-    public GameObject UIInteract { get => _UIInteract; }
+    public UIController MainUI { get => _mainUI; }
+    public PlayerController Player { get => _player; }
 
     private void Awake()
     {

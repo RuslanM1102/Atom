@@ -1,3 +1,4 @@
+using AYellowpaper;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,7 @@ using UnityEngine;
 
 public class DocumentOpen : InteractableObject
 {
+    [SerializeField] private InterfaceReference<ICompleteable, MonoBehaviour> _condition;
     private bool _isOpen = false;
     private Animator _animator;
 
@@ -15,24 +17,11 @@ public class DocumentOpen : InteractableObject
 
     public override void Interact()
     {
-        if (NPCTalk._permition)
+        if(_condition.Value.IsCompleted)
         {
-            //if (!_isOpen)
-            //{
-            //    //_animator.Play("FileOpen", 0, 0.0f);
-            //    _isOpen = true;
-                
-            //}
-            //else
-            //{
-            //    _animator.Play("FileClose", 0, 0.0f);
-            //    _isOpen = false;
-            //}
             _isOpen = !_isOpen;
             _animator.SetBool("isOpen", _isOpen);
             OnInteracted?.Invoke();
         }
-
     }
-
 }
