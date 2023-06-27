@@ -4,5 +4,10 @@ using UnityEngine;
 
 public class QuestList : MonoBehaviour
 {
-    public static List<Quest> quests = new List<Quest>();
+    private List<Quest> _quests = new List<Quest>();
+    
+    public void AddQuest(Quest quest)
+    {
+        _quests.Add(quest);
+    }
 }

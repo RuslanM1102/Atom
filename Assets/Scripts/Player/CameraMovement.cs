@@ -38,7 +38,7 @@ public class CameraMovement : MonoBehaviour
     private void LateUpdate()
     {
         transform.position = Vector3.SmoothDamp(transform.position, 
-            _playerBody.position + Vector3.up,ref _velocity, 40,
+            _playerBody.position + Vector3.up,ref _velocity, 5,
             Mathf.Infinity, Time.unscaledTime);
     }
 }

@@ -43,7 +43,7 @@ public class Quest : MonoBehaviour, ICompleteable
             _questStep.Value.OnCompleted += UpdateStatus;
         }
 
-        QuestList.quests.Add(this);
+        Root.Instance.QuestList.AddQuest(this);
     }
 
     private void UpdateStatus()
