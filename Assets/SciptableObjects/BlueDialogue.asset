@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c7f606febfa1e7847992dd5e70838879, type: 3}
-  m_Name: Dialogs
+  m_Script: {fileID: 11500000, guid: e5ca9bc410a154442a5dd8693a6f86b9, type: 3}
+  m_Name: BlueDialogue
   m_EditorClassIdentifier: 
-  _name: 
+  _textDialogue: "\u041D\u0435 \u0441\u043E \u043C\u043D\u043E\u0439"
