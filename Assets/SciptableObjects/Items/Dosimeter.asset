@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e5ca9bc410a154442a5dd8693a6f86b9, type: 3}
-  m_Name: BlueDialogue
+  m_Script: {fileID: 11500000, guid: c7f606febfa1e7847992dd5e70838879, type: 3}
+  m_Name: Dosimeter
   m_EditorClassIdentifier: 
-  _textDialogue: "\u041D\u0435 \u0441\u043E \u043C\u043D\u043E\u0439"
+  _name: "\u0414\u043E\u0437\u0438\u043C\u0435\u0442\u0440"
+  _type: 2
+  _presenter: {fileID: 5421407472195451582, guid: b641bcfb2eeef55419b73470885bc6ce, type: 3}

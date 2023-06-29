@@ -16,8 +16,8 @@ public class DialogueUI : MonoBehaviour
         _endButton.onClick.AddListener(() => OnDialogueEnded?.Invoke());
     }
 
-    public void SetDialog(string dialogueText)
+    public void SetDialog(Dialogue dialogue)
     {
-        _dialogueText.text = dialogueText;
+        _dialogueText.text = dialogue.TextDialogue;
     }
 }

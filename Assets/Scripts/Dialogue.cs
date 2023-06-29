@@ -6,7 +6,5 @@ using UnityEngine;
 public class Dialogue : ScriptableObject
 {
     [SerializeField] private string _textDialogue;
-
-    public string TextDialogue { get => _textDialogue; }
-
+    public string TextDialogue { get => _textDialogue; } 
 }

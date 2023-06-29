@@ -7,6 +7,12 @@ using UnityEngine;
 public class ItemPresenter : InteractableObject, IOutlineable
 {
     private Outline _outline;
+    private Item _item;
+
+    public void Init(Item item)
+    {
+        _item = item;
+    }
 
     private void Awake()
     {
@@ -15,7 +21,11 @@ public class ItemPresenter : InteractableObject, IOutlineable
 
     public override void Interact()
     {
-        Destroy(gameObject);
+        if (Root.Instance.Player.Inventory.TryPickupItem(_item))
+        {
+            Destroy(gameObject);
+        }
+
         OnInteracted?.Invoke();
     }
 

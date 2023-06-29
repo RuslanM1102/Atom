@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class TalkingNPC : InteractableObject, ICompleteable
 {
-    [SerializeField] private Dialogue _textDialogue;
+    [SerializeField] private Dialogue _dialogue;
     private DialogueUI _dialogueUI;
     private UIController _mainUI;
     private PlayerController _playerController;
@@ -35,7 +35,7 @@ public class TalkingNPC : InteractableObject, ICompleteable
     {
         _playerController.TurnPlayer();
         Cursor.lockState = CursorLockMode.None;
-        _dialogueUI.SetDialog(_textDialogue.TextDialogue);
+        _dialogueUI.SetDialog(_dialogue);
         _dialogueUI.gameObject.SetActive(true);
         _dialogueUI.OnDialogueEnded += EndDialog;
         _mainUI.gameObject.SetActive(false);

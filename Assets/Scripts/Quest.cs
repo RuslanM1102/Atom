@@ -13,6 +13,7 @@ public class Quest : MonoBehaviour, ICompleteable
     [SerializeField] private Item[] _questItems;
     [SerializeField] private InterfaceReference<ICompleteable,MonoBehaviour>[] _questSteps;
 
+    private Inventory _inventory;
     private TMP_Text _questPresenter;
 
     private bool _isCompleted;
@@ -25,6 +26,7 @@ public class Quest : MonoBehaviour, ICompleteable
             _isCompleted = value;
             if (_isCompleted)
             {
+                _inventory.OnInventoryChanged -= UpdateStatus;
                 OnCompleted?.Invoke();
             }
         }
@@ -38,7 +40,9 @@ public class Quest : MonoBehaviour, ICompleteable
 
     public void Start()
     {
-        foreach(var _questStep in _questSteps)
+        _inventory = Root.Instance.Player.Inventory;
+        _inventory.OnInventoryChanged += UpdateStatus;
+        foreach (var _questStep in _questSteps)
         {
             _questStep.Value.OnCompleted += UpdateStatus;
         }
@@ -48,10 +52,9 @@ public class Quest : MonoBehaviour, ICompleteable
 
     private void UpdateStatus()
     {
-        if (_questSteps.Where(x => x.Value.IsCompleted == false)
-            .Count() == 0)
-        {
-            IsCompleted = true;
-        }
+        bool isCompleted = true;
+        isCompleted = isCompleted && _questSteps.All(x => x.Value.IsCompleted == true);
+        isCompleted = isCompleted && _inventory.CheckItems(_questItems);
+        IsCompleted = isCompleted;
     }
 }

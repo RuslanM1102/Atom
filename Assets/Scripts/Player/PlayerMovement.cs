@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -7,13 +8,13 @@ public class PlayerMovement : MonoBehaviour
 {
     [SerializeField] private float _speed = 10f;
 
-    private Rigidbody _rigibody;
+    private Rigidbody _rigidbody;
     private Vector3 _velocity;
     private float _x, _z;
 
     private void Start()
     {
-        _rigibody = GetComponent<Rigidbody>();
+        _rigidbody = GetComponent<Rigidbody>();
     }
 
     private void Update()
@@ -45,7 +46,13 @@ public class PlayerMovement : MonoBehaviour
                 }
                 move = new Vector3(newDirection.x, 0, newDirection.y);
             }
-            _rigibody.velocity = move * Time.fixedDeltaTime * speed;
+            _rigidbody.velocity = move * Time.fixedDeltaTime * speed;
         }
+    }
+
+    public void Stop()
+    {
+        _rigidbody.velocity = Vector3.zero;
+        gameObject.SetActive(!gameObject.activeSelf);
     }
 }

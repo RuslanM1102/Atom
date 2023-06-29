@@ -1,10 +1,12 @@
 using UnityEngine;
 using TMPro;
+using UnityEngine.InputSystem;
 
 public class PlayerInteract : MonoBehaviour
 {
     [SerializeField] private float _maxUseDistance = 5f;
 
+    private PlayerInput _playerInput;
     private Transform _camera;
     private GameObject _interactHintUI;
     private MonoBehaviour _currentObject;
@@ -31,8 +33,11 @@ public class PlayerInteract : MonoBehaviour
 
     private void Start()
     {
+        _playerInput = Root.Instance.Player.PlayerInput;
         _camera = Camera.main.transform;
         _interactHintUI = Root.Instance.MainUI.InteractHintUI;
+
+        _playerInput.actions["Use"].performed += ctx => OnUse();
     }
 
     private void OnUse()

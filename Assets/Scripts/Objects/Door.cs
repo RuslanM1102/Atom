@@ -51,6 +51,8 @@ public class Door : InteractableObject
 
         _stateCoroutine = ChangeState();
         StartCoroutine(_stateCoroutine);
+
+        OnInteracted?.Invoke();
     }
 
     private IEnumerator ChangeState()
