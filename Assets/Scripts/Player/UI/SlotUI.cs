@@ -15,7 +15,7 @@ public class SlotUI : MonoBehaviour
 
     public void SetItem(Item item)
     {
-        string name = item != null ? $"{item.Type}: {item.Name}" : "Пусто";
+        string name = item != null ? $"{item.Name}" : "Пусто";
         _text.text = name;
     }
 }

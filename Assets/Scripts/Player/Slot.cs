@@ -39,6 +39,11 @@ public class Slot : MonoBehaviour
         _item = null;
     }
 
+    public void DestroyItem()
+    {
+        _item = null;
+    }
+
     public bool TryPickup(Item item)
     {
         if (_item != null)

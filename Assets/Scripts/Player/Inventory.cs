@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.Progress;
 
 public class Inventory : MonoBehaviour
 {
@@ -26,12 +27,40 @@ public class Inventory : MonoBehaviour
 
         _playerInput = Root.Instance.Player.PlayerInput;
         _playerInput.actions["Inventory"].performed +=
-            ctx => DropItem((int)ctx.ReadValue<float>() - 1);
+            ctx => DropEquippedItem((int)ctx.ReadValue<float>());
+        _playerInput.actions["UseItem"].performed +=
+            ctx => UseItem();
+        _playerInput.actions["DropItem"].performed +=
+    ctx => DropItem();
 
         for (int i = 0; i < _slots.Length; i++)
         {
             _ui.SetSlot(i, _slots[i].Item);
         }
+    }
+
+    private void UseItem()
+    {
+        if(_slots[0].Item == null)
+        {
+            return;
+        }
+
+        if (TryPickupItem(_slots[0].Item))
+        {
+            _slots[0].DestroyItem();
+            OnItemDrop?.Invoke(0);
+        }
+    }
+    private void DropItem()
+    {
+        if (_slots[0].Item == null)
+        {
+            return;
+        }
+
+        _slots[0].Drop();
+        OnItemDrop?.Invoke(0);
     }
 
     public bool TryPickupItem(Item item)
@@ -55,13 +84,13 @@ public class Inventory : MonoBehaviour
         return isPickuped;
     }
 
-    private void DropItem(int id)
+    private void DropEquippedItem(int id)
     {
         _slots[id].Drop();
         OnItemDrop?.Invoke(id);
     }
 
-    public bool CheckItems(Item[] items)
+    public bool CheckEquipped(Item[] items)
     {
         bool isItemsCollected = true;
         List<Item> myItems = GetItems();
@@ -75,10 +104,11 @@ public class Inventory : MonoBehaviour
     public List<Item> GetItems()
     {
         List<Item> items = new List<Item>();
-        foreach(Slot slot in _slots)
+        for (int i = 1; i < _slots.Length; i++)
         {
-            items.Add(slot.Item);
+            items.Add(_slots[i].Item);
         }
+
         return items;
     }
 }

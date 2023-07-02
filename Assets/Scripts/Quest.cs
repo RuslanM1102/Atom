@@ -10,6 +10,7 @@ using UnityEngine;
 [RequireComponent(typeof(TMP_Text))]
 public class Quest : MonoBehaviour, ICompleteable
 {
+    [SerializeField] private bool _isVisible = true;
     [SerializeField] private Item[] _questItems;
     [SerializeField] private InterfaceReference<ICompleteable,MonoBehaviour>[] _questSteps;
 
@@ -46,15 +47,17 @@ public class Quest : MonoBehaviour, ICompleteable
         {
             _questStep.Value.OnCompleted += UpdateStatus;
         }
-
-        Root.Instance.QuestList.AddQuest(this);
+        if(_isVisible)
+        {
+            Root.Instance.QuestList.AddQuest(this);
+        }
     }
 
     private void UpdateStatus()
     {
         bool isCompleted = true;
         isCompleted = isCompleted && _questSteps.All(x => x.Value.IsCompleted == true);
-        isCompleted = isCompleted && _inventory.CheckItems(_questItems);
+        isCompleted = isCompleted && _inventory.CheckEquipped(_questItems);
         IsCompleted = isCompleted;
     }
 }
