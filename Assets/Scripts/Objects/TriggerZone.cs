@@ -6,8 +6,9 @@ using UnityEngine;
 
 public class TriggerZone : MonoBehaviour, ICompleteable
 {
-    public Action OnCompleted { get; set; }
+    [SerializeField] private bool _isResetable = false;
     private bool _isCompleted;
+    public Action OnCompleted { get; set; }
     public bool IsCompleted
     {
         get => _isCompleted;
@@ -26,6 +27,14 @@ public class TriggerZone : MonoBehaviour, ICompleteable
         if(other.TryGetComponent<PlayerMovement>(out PlayerMovement player))
         {
             IsCompleted = true;
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (_isResetable && other.TryGetComponent<PlayerMovement>(out PlayerMovement player))
+        {
+            IsCompleted = false;
         }
     }
 }
