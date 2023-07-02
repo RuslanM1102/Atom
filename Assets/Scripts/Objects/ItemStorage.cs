@@ -5,7 +5,7 @@ using UnityEngine;
 [RequireComponent(typeof(Outline))]
 public class ItemStorage : InteractableObject, IOutlineable
 {
-    [SerializeField] private Item _item;
+    [SerializeField] private Item[] _items;
     private Outline _outline;
 
     private void Awake()
@@ -15,10 +15,13 @@ public class ItemStorage : InteractableObject, IOutlineable
 
     public override void Interact()
     {
-        var spawned = Instantiate(_item.Presenter);
-        spawned.Init(_item);
-        spawned.transform.position = transform.position + transform.rotation * Vector3.forward;
-        spawned.transform.rotation = transform.rotation;
+        foreach (Item item in _items)
+        {
+            var spawned = Instantiate(item.Presenter);
+            spawned.Init(item);
+            spawned.transform.position = transform.position + transform.rotation * new Vector3(0,0,2);
+            spawned.transform.rotation = transform.rotation;
+        }
         OnInteracted?.Invoke();
 
     }
