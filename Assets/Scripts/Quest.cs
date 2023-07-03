@@ -11,6 +11,7 @@ using UnityEngine;
 public class Quest : MonoBehaviour, ICompleteable
 {
     [SerializeField] private bool _isVisible = true;
+    [SerializeField] private bool _isItemStrict = false;
     [SerializeField] private Item[] _questItems;
     [SerializeField] private InterfaceReference<ICompleteable,MonoBehaviour>[] _questSteps;
 
@@ -36,7 +37,7 @@ public class Quest : MonoBehaviour, ICompleteable
     private void Awake()
     {
         _questPresenter = GetComponent<TMP_Text>();
-        OnCompleted += () => _questPresenter.fontStyle = FontStyles.Strikethrough;
+        OnCompleted += () => _questPresenter.alpha = 0.3f;
     }
 
     public void Start()
@@ -57,7 +58,9 @@ public class Quest : MonoBehaviour, ICompleteable
     {
         bool isCompleted = true;
         isCompleted = isCompleted && _questSteps.All(x => x.Value.IsCompleted == true);
-        isCompleted = isCompleted && _inventory.CheckEquipped(_questItems);
+        bool isItemsCorrect =_inventory.CheckEquipped(_questItems, _isItemStrict);
+        isCompleted = isCompleted && isItemsCorrect;
+
         IsCompleted = isCompleted;
     }
 }

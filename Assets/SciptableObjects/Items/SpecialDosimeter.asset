@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f606febfa1e7847992dd5e70838879, type: 3}
   m_Name: SpecialDosimeter
   m_EditorClassIdentifier: 
-  _name: SpecialDosimeter
+  _name: "\u041E\u043F\u0435\u0440\u0430\u0442\u0438\u0432\u043D\u044B\u0439"
   _type: 2
   _presenter: {fileID: 1126733686419436392, guid: 162c768fc32144a4d9b92979e75156a9, type: 3}

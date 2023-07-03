@@ -63,6 +63,18 @@ public class Inventory : MonoBehaviour
         OnItemDrop?.Invoke(0);
     }
 
+    public Item MoveToStorage()
+    {
+        if (_slots[0].Item == null)
+        {
+            return null;
+        }
+        var item = _slots[0].Item;
+        _slots[0].DestroyItem();
+        OnItemDrop?.Invoke(0);
+        return item;
+    }
+
     public bool TryPickupItem(Item item)
     {
         bool isPickuped = false;
@@ -90,15 +102,22 @@ public class Inventory : MonoBehaviour
         OnItemDrop?.Invoke(id);
     }
 
-    public bool CheckEquipped(Item[] items)
+    public bool CheckEquipped(Item[] items, bool isStrict)
     {
-        bool isItemsCollected = true;
+        bool isEquipped = true;
         List<Item> myItems = GetItems();
-        foreach(Item item in items)
+        foreach (Item item in items)
         {
-            isItemsCollected = isItemsCollected && myItems.Any(x => x == item);
+            isEquipped = isEquipped && myItems.Any(x => x == item);
         }
-        return isItemsCollected;
+        if (isStrict)
+        {
+            var a = myItems.Except(items).ToList();
+            isEquipped = isEquipped &&
+                myItems.Except(items)
+                .Where(x => x != null).Count() == 0;
+        }
+        return isEquipped;
     }
 
     public List<Item> GetItems()

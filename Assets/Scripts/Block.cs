@@ -23,7 +23,7 @@ public class Block : MonoBehaviour
     {
         if(_questList.All(x => x.IsCompleted))
         {
-            Destroy(gameObject);
+            gameObject.SetActive(false);
         }
     }
 }

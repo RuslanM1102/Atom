@@ -17,7 +17,6 @@ public class Slot : MonoBehaviour
             if(_item.Type != _slotType && _slotType != Item.ItemType.Any)
             {
                 _item = null;
-                Debug.Log("Стартовый предмет не подходит по типу");
             }
         }
     }

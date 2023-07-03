@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: c7f606febfa1e7847992dd5e70838879, type: 3}
-  m_Name: Dosimeter
+  m_Name: SpecialShoes
   m_EditorClassIdentifier: 
-  _name: "\u041B\u0438\u0447\u043D\u044B\u0439 \u0434\u043E\u0437\u0438\u043C\u0435\u0442\u0440"
-  _type: 2
-  _presenter: {fileID: 5421407472195451582, guid: b641bcfb2eeef55419b73470885bc6ce, type: 3}
+  _name: "\u0421\u043F\u0435\u0446\u043E\u0431\u0443\u0432\u044C"
+  _type: 1
+  _presenter: {fileID: -570339941206836588, guid: 583fbbf7cace2254885a273f0c9b1651, type: 3}

@@ -5,7 +5,9 @@ using UnityEngine;
 [RequireComponent(typeof(Outline))]
 public class ItemStorage : InteractableObject, IOutlineable
 {
-    [SerializeField] private Item[] _items;
+    [SerializeField] private List<Item> _items = new List<Item>();
+    [SerializeField] private float _itemDistance = 1f;
+    private Inventory _inventory;
     private Outline _outline;
 
     private void Awake()
@@ -13,17 +15,32 @@ public class ItemStorage : InteractableObject, IOutlineable
         _outline = GetComponent<Outline>();
     }
 
+    private void Start()
+    {
+        _inventory = Root.Instance.Player.Inventory;
+    }
+
     public override void Interact()
     {
-        foreach (Item item in _items)
+        if (_items.Count > 0)
         {
-            var spawned = Instantiate(item.Presenter);
-            spawned.Init(item);
-            spawned.transform.position = transform.position + transform.rotation * new Vector3(0,0,2);
-            spawned.transform.rotation = transform.rotation;
+            foreach (Item item in _items)
+            {
+                var spawned = Instantiate(item.Presenter);
+                spawned.Init(item);
+                spawned.transform.position = transform.position + (transform.forward * _itemDistance);
+                spawned.transform.rotation = transform.rotation;
+            }
+            _items.Clear();
+            OnInteracted?.Invoke();
         }
-        OnInteracted?.Invoke();
-
+        else
+        {
+            if (_inventory.MoveToStorage() is Item item)
+            {
+                _items.Add(item);
+            }
+        }
     }
 
     public void TurnHighlight()

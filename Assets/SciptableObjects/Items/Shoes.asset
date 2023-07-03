@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c7f606febfa1e7847992dd5e70838879, type: 3}
   m_Name: Shoes
   m_EditorClassIdentifier: 
-  _name: Shooes
+  _name: "\u0422\u0430\u043F\u043E\u0447\u043A\u0438"
   _type: 1
-  _presenter: {fileID: -570339941206836588, guid: 583fbbf7cace2254885a273f0c9b1651, type: 3}
+  _presenter: {fileID: -570339941206836588, guid: 4654b0fa86b48a54f95cef049f47490e, type: 3}
