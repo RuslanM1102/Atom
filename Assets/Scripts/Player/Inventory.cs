@@ -26,12 +26,9 @@ public class Inventory : MonoBehaviour
         OnItemPickup += (id, item) => OnInventoryChanged?.Invoke();
 
         _playerInput = Root.Instance.Player.PlayerInput;
-        _playerInput.actions["Inventory"].performed +=
-            ctx => DropEquippedItem((int)ctx.ReadValue<float>());
-        _playerInput.actions["UseItem"].performed +=
-            ctx => UseItem();
-        _playerInput.actions["DropItem"].performed +=
-    ctx => DropItem();
+        _playerInput.actions["Inventory"].performed += DropEquippedItem;
+        _playerInput.actions["UseItem"].performed += UseItem;
+        _playerInput.actions["DropItem"].performed += DropItem;
 
         for (int i = 0; i < _slots.Length; i++)
         {
@@ -39,7 +36,16 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    private void UseItem()
+    private void OnDisable()
+    {
+        _playerInput.actions["Inventory"].performed -= DropEquippedItem;
+        _playerInput.actions["UseItem"].performed -= UseItem;
+        _playerInput.actions["DropItem"].performed -= DropItem;
+    }
+
+
+
+    private void UseItem(InputAction.CallbackContext ctx)
     {
         if(_slots[0].Item == null)
         {
@@ -52,7 +58,7 @@ public class Inventory : MonoBehaviour
             OnItemDrop?.Invoke(0);
         }
     }
-    private void DropItem()
+    private void DropItem(InputAction.CallbackContext ctx)
     {
         if (_slots[0].Item == null)
         {
@@ -96,8 +102,9 @@ public class Inventory : MonoBehaviour
         return isPickuped;
     }
 
-    private void DropEquippedItem(int id)
+    private void DropEquippedItem(InputAction.CallbackContext ctx)
     {
+        int id = (int)ctx.ReadValue<float>();
         _slots[id].Drop();
         OnItemDrop?.Invoke(id);
     }

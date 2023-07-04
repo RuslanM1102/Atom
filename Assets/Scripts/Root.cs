@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class Root : MonoBehaviour
 {
@@ -14,8 +15,13 @@ public class Root : MonoBehaviour
     public PlayerController Player { get => _player; }
     public QuestList QuestList { get => _questList; }
 
-    private void Awake()
+    private void OnEnable()
     {
         Instance = this;
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 }

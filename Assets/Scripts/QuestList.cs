@@ -3,11 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
+using System;
 
 public class QuestList : MonoBehaviour
 {
+    public Action OnQuestEnded;
     private List<Quest> _quests = new List<Quest>();
-    
     public void AddQuest(Quest quest)
     {
         _quests.Add(quest);
@@ -18,7 +19,7 @@ public class QuestList : MonoBehaviour
     {
         if (_quests.All(x => x.IsCompleted))
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+            OnQuestEnded?.Invoke();
         }
     }
 }
