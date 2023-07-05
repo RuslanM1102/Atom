@@ -29,7 +29,10 @@ public class UIController : MonoBehaviour
 
     private void OnDisable()
     {
-        _playerInput.actions["ShowQuests"].performed -= OnShowQuests;
+        if(_playerInput != null)
+        {
+            _playerInput.actions["ShowQuests"].performed -= OnShowQuests;
+        }
     }
 
     private void OnShowQuests(InputAction.CallbackContext ctx)
